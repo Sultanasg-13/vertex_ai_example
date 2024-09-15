@@ -13,7 +13,7 @@ The following are the steps to test the deployed model by sending a PDF file for
 from google.cloud import aiplatform
 
 # TODO(developer): Replace these values
-ENDPOINT_NAME = "projects/{Project_ID}/locations/us-central1/endpoints/{Endpoint_ID}"
+ENDPOINT_NAME = "projects/{Project_ID}/locations/{Region}/endpoints/{Endpoint_ID}"
 
 endpoint = aiplatform.Endpoint(endpoint_name=ENDPOINT_NAME)
 ```
@@ -73,17 +73,15 @@ from google.cloud import aiplatform
 # Initialize Vertex AI client
 aiplatform.init(project=PROJECT_ID, location=REGION)
 
-# Set up your endpoint ID (Replace with your deployed Llama 3.1 model endpoint)
-endpoint = aiplatform.Endpoint(endpoint_name='projects/{project}/locations/{region}/endpoints/{endpoint-id}')
 
 # Prepare the input data, using the extracted text in the 'prompt' field
-instances = [{'prompt': pdf_text}]
+instances = [{'prompt': "summarize the following text: "+pdf_text}]
 
 # Call the Llama model with the text input
 response = endpoint.predict(instances=instances)
 
 # Print the prediction result
-print(response)
+print(response.predictions[0])
 ```
 
 ## Step 7: Clean up
