@@ -68,11 +68,6 @@ print(f"Cleaned text: {pdf_text}")
 
 ## Step 6: Send prompt
 ```
-from google.cloud import aiplatform
-
-# Initialize Vertex AI client
-aiplatform.init(project=PROJECT_ID, location=REGION)
-
 
 # Prepare the input data, using the extracted text in the 'prompt' field
 instances = [{'prompt': "summarize the following text: "+pdf_text}]
